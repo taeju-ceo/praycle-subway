@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>프레이클 딸깍 지하철 🙏 화면 대신, 기도를 봅니다</title>
+<meta name="description" content="모두가 화면을 볼 때, 그녀는 기도를 봅니다. 폰 뒤의 묵주링을 딸깍. 11.16 와디즈 오픈">
+<meta property="og:type" content="website">
+<meta property="og:title" content="프레이클 딸깍 지하철 🙏 화면 대신, 기도를 봅니다">
+<meta property="og:description" content="지하철에서 폰 뒤의 묵주링을 딸깍. 옆자리 스님도…  ▶ 지금 바로 보기 · 11.16 와디즈 오픈">
+<meta property="og:image" content="https://praycle-subway.vercel.app/og.jpg">
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500;700;900&display=swap">
+<style>
+:root{--navy:#0e1834;--gold:#f2c94c;--gold2:#d6a028;--bg:#05070f;--fg:#ffffff;color-scheme:dark}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0;background:var(--bg);color:var(--fg);font-family:'Noto Sans KR',system-ui,sans-serif;overflow:hidden;overscroll-behavior:none}
+button{font-family:inherit}
+.stage{position:fixed;inset:0;overflow:hidden;background:var(--bg)}
+.bg{position:absolute;inset:-60px;background:url(poster.jpg) center/cover no-repeat;filter:blur(30px) brightness(.42);transform:scale(1.08)}
+.frame{position:absolute;top:50%;left:50%;width:min(100vw,calc(100vh*9/16));width:min(100vw,calc(100dvh*9/16));aspect-ratio:9/16;transform:translate(-50%,-50%);container-type:inline-size;background:#000}
+.frame video{width:100%;height:100%;display:block;object-fit:contain}
+.endlink{position:absolute;inset:0;z-index:3;display:none;-webkit-tap-highlight-color:transparent}
+.endlink.on{display:block}
+.bar{position:absolute;left:max(12px,env(safe-area-inset-left,0px));right:max(12px,env(safe-area-inset-right,0px));top:calc(env(safe-area-inset-top,0px) + 8px);z-index:5;max-width:560px;margin:0 auto;height:3px;border-radius:2px;background:rgba(255,255,255,.3);overflow:hidden}
+.bar b{display:block;height:100%;width:0;background:#fff}
+.chips{position:absolute;z-index:5;left:max(12px,env(safe-area-inset-left,0px));right:max(12px,env(safe-area-inset-right,0px));bottom:calc(env(safe-area-inset-bottom,0px) + 14px);display:flex;gap:8px;align-items:center}
+.chip{border:0;border-radius:999px;padding:8px 13px;font-weight:700;font-size:13px;background:rgba(0,0,0,.55);color:#fff;backdrop-filter:blur(6px);cursor:pointer;text-decoration:none;white-space:nowrap}
+.chip.go{margin-left:auto;background:rgba(14,24,52,.82);border:1.5px solid var(--gold);color:#ffe9a6}
+.play{position:absolute;inset:0;z-index:6;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,.35);border:0;cursor:pointer}
+.play span{background:rgba(14,24,52,.85);border:2px solid var(--gold);color:#fff;font-weight:900;font-size:19px;padding:14px 24px;border-radius:999px}
+.play.on{display:flex}
+/* tappable area laid over the gold "11.16 와디즈 오픈" button drawn on the video end card (1080x1920: x 243-837, y 1400-1513) */
+.hot{position:absolute;left:50%;top:75.86%;width:55%;height:5.9%;z-index:4;border-radius:999px;transform:translate(-50%,-50%) scale(.6);opacity:0;pointer-events:none;transition:transform .3s cubic-bezier(.2,1.5,.4,1),opacity .2s;-webkit-tap-highlight-color:transparent}
+.hot.on{transform:translate(-50%,-50%) scale(1);opacity:1;pointer-events:auto;animation:ring 1.6s ease-out .4s infinite}
+@keyframes ring{0%{box-shadow:0 0 0 0 rgba(255,236,160,.85)}100%{box-shadow:0 0 0 3.2cqw rgba(255,236,160,0)}}
+.cta{position:absolute;left:0;right:0;bottom:0;z-index:7;transform:translateY(120%);opacity:0;pointer-events:none;transition:transform .5s cubic-bezier(.2,1.4,.4,1),opacity .3s;padding:14px max(16px,env(safe-area-inset-right,0px)) calc(14px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));background:linear-gradient(transparent,rgba(9,14,36,.92) 32%)}
+.cta a.main{display:block;max-width:448px;margin:0 auto;text-align:center;text-decoration:none;background:linear-gradient(#ffd963,var(--gold2));color:var(--navy);font-weight:900;font-size:20px;padding:15px 10px;border-radius:999px;box-shadow:0 8px 24px rgba(242,201,76,.35);animation:pulse 1.6s ease-in-out infinite}
+.cta a.main small{display:block;font-size:13px;font-weight:700;opacity:.8;margin-top:2px}
+.cta .row{max-width:448px;margin:10px auto 0;display:flex;justify-content:space-between;align-items:center;gap:8px}
+.cta .row button{border:0;border-radius:999px;background:rgba(255,255,255,.16);color:#fff;font-weight:700;font-size:13px;padding:7px 12px;cursor:pointer}
+.cta .row span{font-size:11px;color:rgba(255,255,255,.7)}
+.cta.on{transform:none;opacity:1;pointer-events:auto}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.035)}}
+@media (prefers-reduced-motion:reduce){.cta a.main,.hot.on{animation:none}.cta,.hot{transition:none}}
+</style>
+</head><body>
+<div class="stage" id="stage">
+  <div class="bg"></div>
+  <div class="frame" id="frame">
+    <video id="v" src="subway.mp4" playsinline muted autoplay preload="auto" poster="poster.jpg"></video>
+    <a class="endlink" id="endlink" href="https://www.wadiz.io/funding/428362" target="_blank" rel="noopener" aria-label="와디즈 프로젝트 열기"></a>
+    <a class="hot" id="hot" href="https://www.wadiz.io/funding/428362" target="_blank" rel="noopener" aria-label="와디즈에서 알림신청하기"></a>
+  </div>
+  <div class="bar"><b id="prog"></b></div>
+  <div class="chips">
+    <button class="chip" id="s" type="button">🔇 소리 켜기</button>
+    <a class="chip go" id="go" href="https://www.wadiz.io/funding/428362" target="_blank" rel="noopener">와디즈 알림신청 ›</a>
+  </div>
+  <button class="play" id="play" type="button" aria-label="재생"><span>▶ 재생하기</span></button>
+  <div class="cta" id="cta">
+    <a class="main" href="https://www.wadiz.io/funding/428362" target="_blank" rel="noopener">지금 알림신청하기<small>11.16 와디즈 오픈 · 오픈 소식을 가장 먼저 받아보세요</small></a>
+    <div class="row"><button type="button" id="again">↺ 처음부터 다시 보기</button><span>※ 영상 속 장면은 AI로 연출했습니다</span></div>
+  </div>
+</div>
+<script>
+const END_AT=25.0;   // the end card with the drawn "11.16 와디즈 오픈" button starts here
+const $=id=>document.getElementById(id);
+const v=$('v'),s=$('s'),play=$('play'),cta=$('cta'),hot=$('hot'),prog=$('prog'),go=$('go'),frame=$('frame'),again=$('again');
+function tryPlay(){const p=v.play();if(p&&p.then)p.then(()=>play.classList.remove('on')).catch(()=>play.classList.add('on'))}
+const endlink=$('endlink');
+function ending(on){cta.classList.toggle('on',on);hot.classList.toggle('on',on);endlink.classList.toggle('on',on);go.hidden=on}
+v.addEventListener('timeupdate',()=>{if(v.duration)prog.style.width=Math.min(100,v.currentTime/v.duration*100)+'%';ending(v.currentTime>=END_AT+0.6)});
+v.addEventListener('ended',()=>{prog.style.width='100%';ending(true)});
+v.addEventListener('error',()=>ending(true));
+again.addEventListener('click',()=>{ending(false);v.currentTime=0;tryPlay()});
+function setMuted(m){v.muted=m;s.textContent=m?'🔇 소리 켜기':'🔊 소리 끄기';if(!m&&!v.ended)tryPlay()}
+s.addEventListener('click',e=>{e.stopPropagation();setMuted(!v.muted)});
+frame.addEventListener('click',e=>{if(e.target===hot||e.target===endlink)return;if(v.muted)setMuted(false)});
+play.addEventListener('click',()=>tryPlay());
+tryPlay();
+</script>
+
+</body></html>
